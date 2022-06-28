@@ -1,0 +1,34 @@
+version: '3'
+services:
+   app:
+      container_name: user-service
+      volumes:
+         - ./config.json:/root/user-service/config.json
+      build: .
+      ports:
+         - "8888:8888"
+      depends_on:
+         - postgres
+   postgres:
+      image: postgres
+      container_name: postgresdb
+      restart: always
+      environment:
+         - POSTGRES_USER=root
+         - POSTGRES_PASSWORD=root
+         - POSTGRES_DB=root
+
+      ports:
+         - "5432:5432"
+      volumes:
+         - ./docker_postgres_init.sql:/docker-entrypoint-initdb.d/docker_postgres_init.sql
+
+   pgadmin-compose:
+         image: dpage/pgadmin4
+         environment:
+            PGADMIN_DEFAULT_EMAIL: "test@gmail.com"
+            PGADMIN_DEFAULT_PASSWORD: "test123!"
+         ports:
+            - "16543:80"
+         depends_on:
+            - postgres

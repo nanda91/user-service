@@ -1,0 +1,15 @@
+{
+  "app": {
+    "name": "service-portal-jobs",
+    "debug": true,
+    "host": "0.0.0.0",
+    "port": "8888",
+    "secret": "t3st_s3cr3t_p0Rt4L"
+  },
+  "database": {
+    "host": "postgresdb",
+    "database": "root",
+    "username": "root",
+    "password": "root"
+  }
+}
